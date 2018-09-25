@@ -6,6 +6,7 @@ import LogAnalysis
 import Log
 import Golf
 import LocalMaxima
+import Histogram
 
 --import Data.Set
 import Data.Maybe
@@ -13,6 +14,8 @@ import Text.Printf
 import System.Environment
 --import System.Posix.Temp
 import Control.Monad
+import Data.List
+import Data.IntMap.Strict (IntMap, insertWithKey, insert, empty, filter)
 
 --import Test.Tasty
 --import Test.Tasty.SmallCheck as SC
@@ -33,7 +36,8 @@ main =
 --  putStr (show (addOrAppendAllAtIndex [(1, []), (2, ["h", "e"])] "l" [1, 2]))
 --  putStr (show (skips "hello!"))
 --  putStr (show (divisors 12))
-  putStr (show (localMaxima [2,3,4,1,5]))
+--  putStr (show (localMaxima [2,3,4,1,5]))
+  putStr ( (histogram(([1,2,3,4,1,5,1]))))
 
 
 
