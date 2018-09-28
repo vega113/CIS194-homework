@@ -16,6 +16,7 @@ import System.Environment
 import Control.Monad
 import Data.List
 import Data.IntMap.Strict (IntMap, insertWithKey, insert, empty, filter)
+import Week4.Wholemeal (fun1)
 
 --import Test.Tasty
 --import Test.Tasty.SmallCheck as SC
@@ -37,7 +38,8 @@ main =
 --  putStr (show (skips "hello!"))
 --  putStr (show (divisors 12))
 --  putStr (show (localMaxima [2,3,4,1,5]))
-  putStr ( (histogram(([1,2,3,4,1,5,1]))))
+--  putStr ( (histogram(([1,2,3,4,1,5,1]))))
+  putStr ( show(fun1(([2]))))
 
 
 

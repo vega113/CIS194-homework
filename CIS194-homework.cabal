@@ -15,7 +15,7 @@ extra-source-files:  README.md
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Golf, Hanoi, Log, LogAnalysis, ValidateCard, Data.String.Strip, LocalMaxima
+  exposed-modules:     Golf, Hanoi, Log, LogAnalysis, ValidateCard, Data.String.Strip, LocalMaxima, Week4.Wholemeal
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
 
