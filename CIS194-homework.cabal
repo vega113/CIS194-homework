@@ -1,0 +1,41 @@
+name:                CIS194-homework
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/githubuser/CIS194-homework#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Author name here
+maintainer:          example@example.com
+copyright:           2018 Author name here
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Golf, Hanoi, Log, LogAnalysis, ValidateCard, Data.String.Strip, LocalMaxima
+  build-depends:       base >= 4.7 && < 5
+  default-language:    Haskell2010
+
+executable CIS194-homework
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5, containers
+
+test-suite CIS194-homework-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , CIS194-homework
+                     , hspec
+                     , QuickCheck
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: git@github.com:vega113/CIS194-homework.git

@@ -4,13 +4,13 @@ import Data.List
 import Data.Ord
 import Data.Char
 
-digits = reverse [0..9]
-header = "\n" ++ map (const '=') digits ++ "\n" ++ map intToDigit (reverse digits)
+digits = [0..9]
+header = "\n" ++ map (const '=') digits ++ "\n" ++ map intToDigit digits
 
 frequencies :: [Int] -> [(Int, Int)]
 frequencies inList =
   let groupAcc = group $ sort inList
-   in foldl
+   in foldl'
         (\b a ->
            case a of
              (x:xs) -> b ++ [(x, length a)])
@@ -20,7 +20,7 @@ frequencies inList =
 frequenciesToString :: [(Int, Int)] -> String
 frequenciesToString m =
   snd
-    (foldl
+    (foldl'
        (\b a ->
           case b of
             (isFirst, acc) ->
@@ -29,7 +29,7 @@ frequenciesToString m =
                     then let (keys, frequencies) = unzip freqsHigherThanCurrent
                              maxInLine = maximum keys
                              currentLine =
-                               foldl
+                               foldl'
                                  (\b1 a1 ->
                                     if a1 `elem` keys
                                       then b1 ++ "*"
@@ -41,7 +41,7 @@ frequenciesToString m =
                                 else (False, acc ++ "\n" ++ currentLine))
                     else b)
        (True, [])
-       digits)
+       (reverse digits))
 
 histogram :: [Int] -> String
-histogram l = (frequenciesToString $ frequencies l) ++ header
+histogram l = frequenciesToString (frequencies l) ++ header
