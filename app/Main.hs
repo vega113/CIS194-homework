@@ -1,13 +1,5 @@
 module Main where
 
-import ValidateCard
-import Hanoi
-import LogAnalysis
-import Log
-import Golf
-import LocalMaxima
-import Histogram
-
 --import Data.Set
 import Data.Maybe
 import Text.Printf
@@ -16,7 +8,8 @@ import System.Environment
 import Control.Monad
 import Data.List
 import Data.IntMap.Strict (IntMap, insertWithKey, insert, empty, filter)
-import Week4.Wholemeal (fun1)
+--import Week4.Wholemeal (fun1)
+import Week4.BinaryTree
 
 --import Test.Tasty
 --import Test.Tasty.SmallCheck as SC
@@ -39,7 +32,8 @@ main =
 --  putStr (show (divisors 12))
 --  putStr (show (localMaxima [2,3,4,1,5]))
 --  putStr ( (histogram(([1,2,3,4,1,5,1]))))
-  putStr ( show(fun1(([2]))))
+--  putStr ( show(fun1(([2]))))
+  putStr ( show (foldTree "ABCDEFJ"))
 
 
 

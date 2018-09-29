@@ -1,4 +1,9 @@
-module Week4.Wholemeal (fun1, fun1', fun2, fun2') where
+module Week4.Wholemeal
+  ( fun1
+  , fun1'
+  , fun2
+  , fun2'
+  ) where
 
 fun1 :: [Integer] -> Integer
 fun1 [] = 1
@@ -21,11 +26,14 @@ fun1' =
   take 1 . filter even
 
 calc :: Integer -> Integer
-calc xx = case xx of
-  1 -> 0
-  xxx -> if even xxx then xxx `div` 2 else 3*xxx +1
+calc xx =
+  case xx of
+    1 -> 0
+    xxx ->
+      if even xxx
+        then xxx `div` 2
+        else 3 * xxx + 1
 
 --Looks like the fun2 doesn't stop unless you start with with power of 2
 fun2' :: Integer -> Integer
 fun2' x = sum (takeWhile (> 1) (iterate calc x))
-
