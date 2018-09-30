@@ -34,6 +34,8 @@ spec =
 
     it "folds list with AB" $ do foldTree "AB" `shouldBe` Node 2 Leaf 'B' (Node 1 Leaf 'A' Leaf)
 
+    it "passes is blanced tree check" $ property $ \l -> verifyBalancedTree(foldTreeStr l) === True
+
     it "level of left sub tree should not differ by more than 1 from right sub tree" $
       property $ \l ->
         let treeA = foldTreeStr l
@@ -41,13 +43,9 @@ spec =
          in case childrenLevels of
               (levelChildL, levelChildR) -> (abs (levelChildL - levelChildR) <= 1) === True
 
-    it "the level should be log 2 of number of elements plus/minus 1" $ property $ \l ->
-          let
-          listLength = length l
-          treeLevel = extractTreeLevel(foldTreeStr l)
-          logLevel = if listLength > 0 then  1  + round ( logBase (fromIntegral 2) (fromIntegral (listLength))) else 0
-          in ((abs(treeLevel - logLevel)) <= 1) === True
-
+verifyBalancedTree :: Tree a -> Bool
+verifyBalancedTree Leaf = True
+verifyBalancedTree (Node _ mtl _ mtr) = abs ((extractTreeLevel mtl) - (extractTreeLevel mtr)) <= 1 && (verifyBalancedTree mtl) && (verifyBalancedTree mtr)
 
 foldTreeStr :: String -> Tree Char
 foldTreeStr = foldTree
