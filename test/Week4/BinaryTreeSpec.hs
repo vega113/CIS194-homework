@@ -17,17 +17,41 @@ spec :: Spec
 spec =
   describe "balanced binary tree'" $ do
     it "compares trees with Node and Node correctly left level == right level" $ do
-      compareNodes (Node 0 Leaf 'A' Leaf) (Node 0 Leaf 'A' Leaf) `shouldBe` True
+      compareNodes (Node 0 Leaf 'A' Leaf) (Node 1 Leaf 'A' Leaf) `shouldBe` True
+
     it "compares trees with Node and Node correctly node > leaf" $ do
-      compareNodes (Node 1 Leaf 'A' Leaf) (Leaf) `shouldBe` True
+      compareNodes (Node 1 Leaf 'A' Leaf) (Leaf) `shouldBe` False
+
     it "compares trees with Node and Node correctly node > node" $ do
-      compareNodes (Node 1 Leaf 'A' Leaf) (Node 0 Leaf 'A' Leaf) `shouldBe` True
+      compareNodes (Node 1 Leaf 'A' Leaf) (Node 1 Leaf 'A' Leaf) `shouldBe` True
+
     it "compares trees with Node and Node correctly node < node" $ do
-      compareNodes (Node 1 Leaf 'A' Leaf) (Node 2 Leaf 'A' Leaf) `shouldBe` False
+      compareNodes (Node 1 Leaf 'A' Leaf) (Node 2 Leaf 'A' Leaf) `shouldBe` True
+
     it "folds list empty list " $ do foldTree ([] :: [String]) `shouldBe` Leaf
-    it "folds list with only A" $ do foldTree "A" `shouldBe` Node 0 Leaf 'A' Leaf
-    it "folds list with AB" $ do foldTree "AB" `shouldBe` Node 1 (Node 0 Leaf 'A' Leaf) 'B' Leaf
---    it "computes the same value as fun1 2" $ do fun1 [2] `shouldBe` 0
---    it "computes the same value as fun1 3" $ do fun1 [3] `shouldBe` 1
---    it "computes the same value as fun1 4" $ do fun1 [3, 4] `shouldBe` 2
-    it "the level should log 2 of number of elements" $ property $ \l -> extractTreeLevel(foldTreeStr l) ===  toInteger( round (logBase 2 (length l)))
+
+    it "folds list with only A" $ do foldTree "A" `shouldBe` Node 1 Leaf 'A' Leaf
+
+    it "folds list with AB" $ do foldTree "AB" `shouldBe` Node 2 Leaf 'B' (Node 1 Leaf 'A' Leaf)
+
+    it "level of left sub tree should not differ by more than 1 from right sub tree" $
+      property $ \l ->
+        let treeA = foldTreeStr l
+            childrenLevels = extractChildrenLevels treeA
+         in case childrenLevels of
+              (levelChildL, levelChildR) -> (abs (levelChildL - levelChildR) <= 1) === True
+
+    it "the level should be log 2 of number of elements plus/minus 1" $ property $ \l ->
+          let
+          listLength = length l
+          treeLevel = extractTreeLevel(foldTreeStr l)
+          logLevel = if listLength > 0 then  1  + round ( logBase (fromIntegral 2) (fromIntegral (listLength))) else 0
+          in ((abs(treeLevel - logLevel)) <= 1) === True
+
+
+foldTreeStr :: String -> Tree Char
+foldTreeStr = foldTree
+
+extractChildrenLevels :: Tree a -> (Integer, Integer)
+extractChildrenLevels Leaf = (0,0)
+extractChildrenLevels (Node _ mtl _ mtr) = (extractTreeLevel mtl, extractTreeLevel mtr)
