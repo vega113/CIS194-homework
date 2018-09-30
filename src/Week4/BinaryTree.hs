@@ -13,9 +13,9 @@ foldTree = foldr insertB Leaf
 
 compareNodes :: Tree a -> Tree a -> Bool
 compareNodes Leaf Leaf = False
-compareNodes (Node levelL leftTreeL valueL rightTreeL) Leaf = False
-compareNodes Leaf (Node levelR leftTreeR valueR rightTreeR) = True
-compareNodes (Node levelL leftTreeL valueL rightTreeL) (Node levelR leftTreeR valueR rightTreeR) = levelL <= levelR
+compareNodes (Node _ _ _ _) Leaf = False
+compareNodes Leaf (Node _ _ _ _) = True
+compareNodes (Node levelL _ _ _) (Node levelR _ _ _) = levelL <= levelR
 
 insertB :: a -> Tree a -> Tree a
 insertB value Leaf = Node 1 Leaf value Leaf
