@@ -2,7 +2,12 @@ module Week4.SieveOfSundaram where
 
 sieveSundaram :: Integer -> [Integer]
 sieveSundaram 0 = []
-sieveSundaram n = produceSieveNums $ n `div` 2
+sieveSundaram 1 = []
+sieveSundaram n =
+  let newN = (n `div` 2)
+      sieveNums = produceSieveNums newN
+   in 2 : filter (<= n) (map (\x -> 2 * x + 1) (filter (`notElem` sieveNums) [1 .. newN]))
+
 
 cartProd :: [a] -> [b] -> [(a, b)]
 cartProd xs ys = [(x, y) | x <- xs, y <- ys]
@@ -14,4 +19,4 @@ pr2 :: Integer -> [(Integer, Integer)]
 pr2 p = map (\x -> case x of (z1, z2) -> (2*z1 +1, 2*z2+1)) $ pr1 p
 
 produceSieveNums :: Integer -> [Integer]
-produceSieveNums num = [z | x <- [1 .. num], y <- [1..num],  let z = x + y + 2*x*y]
+produceSieveNums num = [z | x <- [1 .. num], y <- [1..x], let z = x + y + 2*x*y, z <= num]

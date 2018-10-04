@@ -29,11 +29,14 @@ spec =
         sieveSundaram 6 `shouldBe` [2, 3, 5]
 
    it "should return primes list for 15" $ do
-        sieveSundaram 15 `shouldBe` [2, 3, 5, 7]
+        sieveSundaram 15 `shouldBe` [2, 3, 5, 7, 11 ,13]
    it "should return primes list for any n" $ property $ \num ->
-        (sieveSundaram num) === filter isPrime [1..num]
+        (sieveSundaram $ abs num) === filter isPrime [1.. abs num]
 
 
 
 myL :: Integer -> Integer
 myL n = n
+
+genPos :: Gen Int
+genPos = abs `fmap` (arbitrary :: Gen Int) `suchThat` (> 0)
