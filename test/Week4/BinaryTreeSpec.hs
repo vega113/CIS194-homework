@@ -1,4 +1,7 @@
-
+module Week4.BinaryTreeSpec
+  ( main
+  , spec
+  ) where
 
 import Test.Hspec
 import Test.QuickCheck
