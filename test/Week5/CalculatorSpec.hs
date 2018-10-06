@@ -8,7 +8,7 @@ import Test.QuickCheck
 import Week5.Calculator
 import Week5.ExprT
 import Week5.Parser
---import Week5.StackVM
+import Week5.Expr
 
 -- `main` is here so that this module can be run from GHCi on its own.  It is
 -- not needed for automatic spec discovery.

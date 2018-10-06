@@ -2,12 +2,8 @@ module Week5.Calculator where
 
 import Week5.ExprT
 import Week5.Parser
+import Week5.Expr
 --import Week5.StackVM
-
-class Expr a where
-  lit :: Integer -> a
-  add :: a -> a -> a
-  mul :: a -> a -> a
 
 instance Expr ExprT where
   lit = Lit
