@@ -4,7 +4,6 @@ module Week5.CalcStackVars where
 
 import qualified Data.Map       as M
 import           Week5.Expr
-import           Week5.Parser
 import           Week5.VarExprT
 
 class HasVars a where

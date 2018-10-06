@@ -14,6 +14,3 @@ instance Expr Program where
 compile :: String -> Maybe Program
 compile = parseExp lit add mul
 
-class HasVars a where
-  var :: String -> a
-
